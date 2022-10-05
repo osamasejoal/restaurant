@@ -17,10 +17,12 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->integer('gender')->comment('1 = male; 2 = female; 3 = others');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('image')->default('default.png');
-            $table->integer('roll')->default('3')->comment('1 = admin; 2 = editor; 3 = user;');
+            $table->integer('role')->default('3')->comment('1 = admin; 2 = editor/staff; 3 = customer;');
+            $table->integer('status')->default('1')->comment('1 = active; 0 = deactive');
             $table->rememberToken();
             $table->timestamps();
         });

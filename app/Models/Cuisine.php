@@ -10,4 +10,17 @@ class Cuisine extends Model
     use HasFactory;
     
     protected $guarded = [];
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                        RELATION WITH FOOD TABLE
+    |--------------------------------------------------------------------------
+    */
+    public function food()
+    {
+        return $this->hasOne(Food::class);
+    }
 }

@@ -681,16 +681,19 @@
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
 									<div class="header-info">
-										<span>Hello, <strong>Samuel</strong></span>
+										@php
+											$name = explode(' ', auth()->user()->name);
+										@endphp
+										<span>Hello, <strong>{{ $name[0] }}</strong></span>
 									</div>
-                                    <img src="{{asset('backend/assets')}}/images/profile/pic1.jpg" width="20" alt=""/>
+                                    <img src="{{ asset('backend/assets/images/profile_pic/' . auth()->user()->image) }}" width="20" alt=""/>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="{{route('frontpage')}}" class="dropdown-item ai-icon">
 										<i class="fas fa-braille"></i>
                                         <span class="ms-2">Frontpage </span>
                                     </a>
-                                    <a href="app-profile.html" class="dropdown-item ai-icon">
+                                    <a href="{{route('profile.index')}}" class="dropdown-item ai-icon">
                                         <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                         <span class="ms-2">Profile </span>
                                     </a>
@@ -725,15 +728,32 @@
 				<ul class="metismenu" id="menu">
 
                     {{-- Dashboard --}}
-                    <li><a href="{{route('home')}}" class="ai-icon" aria-expanded="false">
+                    <li class="{{ request()->routeIs('home') ? 'mm-active' : '' }}">
+						<a href="{{route('home')}}" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-networking"></i>
 							<span class="nav-text">Dashboard</span>
 						</a>
 					</li>
 
+                    {{-- Users --}}
+                    <li class="{{ request()->routeIs('user.create') ? 'mm-active' : '' }}
+							   {{ request()->routeIs('user.view') ? 'mm-active' : '' }}">
+						<a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-television"></i>
+							<span class="nav-text">Users</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('user.create')}}">Add Users</a></li>
+							<li><a href="{{route('user.view', ['id' => 1])}}">Admin</a></li>
+                            <li><a href="{{route('user.view', ['id' => 2])}}">Staff</a></li>
+                            <li><a href="{{route('user.view', ['id' => 3])}}">Customer</a></li>
+                        </ul>
+                    </li>
+
                     {{-- Cuisine --}}
                     <li class="{{ request()->routeIs('cuisine.create') ? 'mm-active' : '' }}
-						{{ request()->routeIs('cuisine.edit') ? 'mm-active' : '' }}">
+							   {{ request()->routeIs('cuisine.edit') ? 'mm-active' : '' }}
+							   {{ request()->routeIs('cuisine.index') ? 'mm-active' : '' }}">
 						<a href="{{route('cuisine.index')}}" class="ai-icon" aria-expanded="false">
 							<i class="fas fa-utensils"></i>
 							<span class="nav-text">Cuisine</span>
@@ -742,12 +762,41 @@
 
                     {{-- Category --}}
                     <li class="{{ request()->routeIs('category.create') ? 'mm-active' : '' }}
-						{{ request()->routeIs('category.edit') ? 'mm-active' : '' }}">
+						{{ request()->routeIs('category.edit') ? 'mm-active' : '' }}
+						{{ request()->routeIs('category.index') ? 'mm-active' : '' }}">
 						<a href="{{route('category.index')}}" class="ai-icon" aria-expanded="false">
 							<i class="fas fa-cheese"></i>
 							<span class="nav-text">Category</span>
 						</a>
 					</li>
+
+                    {{-- Food --}}
+                    <li class="{{ request()->routeIs('food.create') ? 'mm-active' : '' }}
+						{{ request()->routeIs('food.edit') ? 'mm-active' : '' }}
+						{{ request()->routeIs('food.index') ? 'mm-active' : '' }}">
+						<a href="{{route('food.index')}}" class="ai-icon" aria-expanded="false">
+							<i class="fas fa-hamburger"></i>
+							<span class="nav-text">Food</span>
+						</a>
+					</li>
+
+                    {{-- Company --}}
+                    <li class="{{ request()->routeIs('companyInfo.index') ? 'mm-active' : '' }}
+							   {{ request()->routeIs('companySocial.index') ? 'mm-active' : '' }}
+							   {{ request()->routeIs('companySocial.create') ? 'mm-active' : '' }}">
+						<a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="fas fa-building"></i>
+							<span class="nav-text">Company</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li>
+								<a href="{{ route('companyInfo.index') }}">Info</a>
+							</li>
+							<li class="{{ request()->routeIs('companySocial.create') ? 'mm-active' : '' }}">
+								<a href="{{ route('companySocial.index') }}">Socials</a>
+							</li>
+                        </ul>
+                    </li>
 
                     {{-- Apps --}}
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

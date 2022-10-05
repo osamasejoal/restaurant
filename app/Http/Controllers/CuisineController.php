@@ -175,7 +175,10 @@ class CuisineController extends Controller
     */
     public function destroy($id)
     {
-        Cuisine::find($id)->delete();
+        $cuisine = Cuisine::find($id);
+
+        $cuisine->delete();
+        unlink(base_path('public/backend/assets/images/cuisine/' . $cuisine->image));
         return back()->with('success', 'Successfully deleted your Cuisine');
     }
 }

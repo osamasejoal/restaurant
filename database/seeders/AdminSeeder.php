@@ -19,9 +19,10 @@ class AdminSeeder extends Seeder
         DB::table('users')->insert([
             'name'      => 'Osama Sejoal',
             'email'     => 'osamasejoal@mail.com',
+            'gender'    => '1',
             'password'  => Hash::make('osamasejoal@mail.com'),
             'image'     => 'default.png',
-            'roll'      => '1',
+            'role'      => '1',
         ]);
     }
 }

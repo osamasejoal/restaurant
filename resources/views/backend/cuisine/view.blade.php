@@ -50,7 +50,6 @@
                                     </thead>
                                     <tbody>
                                         @forelse ($cuisines as $cuisine)
-                                        ($cuisines as $cuisine)
                                             <tr>
 
                                                 {{-- Serial Number --}}

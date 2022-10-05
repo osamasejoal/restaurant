@@ -175,7 +175,10 @@ class CategoryController extends Controller
     */
     public function destroy($id)
     {
-        Category::find($id)->delete();
+        $category = Category::find($id);
+        
+        $category->delete();
+        unlink(base_path('public/backend/assets/images/category/' . $category->image));
         return back()->with('success', 'Successfully deleted your Category');
     }
 }

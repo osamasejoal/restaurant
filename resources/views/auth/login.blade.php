@@ -11,19 +11,25 @@
                     <h4 class="text-center mb-4">Sign in your account</h4>
 
                     {{-- Form --}}
-                    <form action="{{route('login')}}" method="post">
+                    <form action="{{ route('login') }}" method="post">
                         @csrf
 
                         {{-- Email --}}
                         <div class="form-group">
                             <label class="mb-1"><strong>Email</strong></label>
                             <input name="email" type="email" class="form-control">
+                            @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
                         </div>
 
                         {{-- Password --}}
                         <div class="form-group">
                             <label class="mb-1"><strong>Password</strong></label>
                             <input name="password" type="password" class="form-control">
+                            @if ($errors->has('password'))
+                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                            @endif
                         </div>
                         <div class="form-row d-flex justify-content-between mt-4 mb-2">
                             <div class="form-group">
@@ -34,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <a href="page-forgot-password.html">Forgot Password?</a>
+                                <a href="{{ route('password.request') }}">Forgot Password?</a>
                             </div>
                         </div>
                         <div class="text-center">
@@ -42,7 +48,7 @@
                         </div>
                     </form>
                     <div class="new-account mt-3">
-                        <p>Don't have an account? <a class="text-primary" href="{{route('register')}}">Sign up</a></p>
+                        <p>Don't have an account? <a class="text-primary" href="{{ route('register') }}">Sign up</a></p>
                     </div>
                 </div>
             </div>
